@@ -1,0 +1,23 @@
+#!/bin/bash
+
+BASE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Install the path to local bin.
+# Only inserts if the supplied file exists in $HOME.
+function install-path {
+
+  APP_PATH="export PATH=$PATH:$BASE/bin # clojure-hub"
+
+  if [[ -e $HOME/$1 ]]; then
+    sed -i -e '/clojure-hub/d' ~/$1
+    echo "$APP_PATH" >> ~/$1
+  fi
+}
+
+# Install lein
+curl -Sso $BASE/bin/lein https://raw.github.com/technomancy/leiningen/stable/bin/lein
+chmod 755 $BASE/bin/lein
+
+install-path .bash_profile
+install-path .bashrc
+
