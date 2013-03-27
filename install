@@ -11,6 +11,7 @@ function install-path {
   if [[ -e $HOME/$1 ]]; then
     sed -i -e '/clojure-hub/d' ~/$1
     echo "$APP_PATH" >> ~/$1
+    . ~/$1
   fi
 }
 
@@ -20,4 +21,8 @@ chmod 755 $BASE/bin/lein
 
 install-path .bash_profile
 install-path .bashrc
+
+lein > /dev/null
+
+ln -sf "$BASE/profiles.clj" "$HOME/.lein/profiles.clj"
 
