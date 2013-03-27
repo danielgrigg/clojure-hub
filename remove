@@ -5,10 +5,10 @@
 BASE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 function remove-path {
-  if [[ -e $HOME/$1 ]]; then
-    sed -i -e '/clojure-hub/d' ~/$1
+  if [[ -e $1 ]]; then
+    sed -i -e '/clojure-hub/d' $1
   fi
 }
 
-remove-path .bash_profile
-remove-path .bashrc
+remove-path $HOME/.bash_profile
+remove-path $HOME/.bashrc
